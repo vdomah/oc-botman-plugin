@@ -1,0 +1,5 @@
+fields:
+  telegram_bot_key:
+    label: Bot API token
+    span: auto
+    type: text
