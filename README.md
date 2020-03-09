@@ -1,5 +1,7 @@
 ### Listening to events
 
+You need to create your own plugin to listen to BotMan's events and write your conversation classes.
+
 ````
 use BotMan\BotMan\Drivers\DriverManager;
 use BotMan\Drivers\Telegram\TelegramDriver;
@@ -14,8 +16,12 @@ public function boot()
         DriverManager::loadDriver(TelegramPhotoDriver::class);
     });
 
-    // than you create your listeners to init a conversation.
+    // than you create your listeners to hear and reply to a message or init a conversation.
     Event::listen('vdomah.botman.before_listen', function ($botman) {
+        $botman->hears('My First Message', function ($bot) {
+            $bot->reply('Your First Response');
+        });
+        
         $botman->hears('hello|/start', function (BotMan $bot) {
             $bot->startConversation(new DefaultConversation());
         });
