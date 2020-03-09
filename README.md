@@ -18,10 +18,12 @@ public function boot()
 
     // than you create your listeners to hear and reply to a message or init a conversation.
     Event::listen('vdomah.botman.before_listen', function ($botman) {
+        // https://botman.io/2.0/receiving
         $botman->hears('My First Message', function ($bot) {
             $bot->reply('Your First Response');
         });
         
+        // https://botman.io/2.0/conversations
         $botman->hears('hello|/start', function (BotMan $bot) {
             $bot->startConversation(new DefaultConversation());
         });
