@@ -1,6 +1,6 @@
 plugin:
     name: 'vdomah.botman::lang.plugin.name'
     description: 'vdomah.botman::lang.plugin.description'
-    author: Vdomah
+    author: Art Gek
     icon: oc-icon-bolt
-    homepage: ''
+    homepage: 'https://github.com/vdomah/oc-botman-plugin'

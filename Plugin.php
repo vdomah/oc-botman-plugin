@@ -13,12 +13,34 @@ class Plugin extends PluginBase
     {
         return [
             'settings' => [
-                'label'       => 'Botman',
+                'label'       => 'vdomah.botman::lang.settings.name',
                 'icon'        => 'icon-arrows',
-                'description' => 'Botman settings',
+                'description' => 'vdomah.botman::lang.settings.description',
                 'class'       => Settings::class,
-                'order'       => 0,
+                'order'       => 500,
                 'permissions' => ['vdomah.botman.access_settings'],
+            ],
+        ];
+    }
+
+    public function register()
+    {
+        $arDrivers = [
+            'code' => 'telegram',
+            'settings' => [
+                ['field' => 'token', 'value' => 'yourTOKEN'],
+            ],
+        ];
+
+        //Settings::set('drivers', $arDrivers);
+    }
+
+    public function registerPermissions()
+    {
+        return [
+            'vdomah.botman.access_settings' => [
+                'tab' => 'vdomah.botman::lang.plugin.name',
+                'label' => 'vdomah.botman::lang.permissions.access_settings'
             ],
         ];
     }

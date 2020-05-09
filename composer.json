@@ -1,6 +1,5 @@
 {
   "require": {
-    "botman/botman": "2.5.0",
-    "botman/driver-telegram": "^1.5"
+    "botman/botman": "2.5.0"
   }
 }

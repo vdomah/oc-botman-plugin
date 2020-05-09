@@ -1,28 +1,22 @@
 <?php
 use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\Cache\LaravelCache;
-use Vdomah\Botman\Models\Settings;
+use Vdomah\Botman\Classes\Helper;
 
-Route::match(['get', 'post'], '/botman', function () {
-    $config = [
-        // Your driver-specific configuration
-        "telegram" => [
-            "token" => Settings::get('telegram_bot_key'),
-        ],
-        'config' => [
-            'conversation_cache_time' => 30,
-        ],
-    ];
-// Load the driver(s) you want to use
-    Event::fire('vdomah.botman.load_driver');
+Route::any('/botman', function () {
+    // Listen to event to load driver(s) you want to use.
+    // DriverManager::loadDriver(TelegramDriver::class);
+    Event::fire(Helper::EVENT_LOAD_DRIVER);
 
-// Create an instance
-    $cache = new LaravelCache;
-    $botman = BotManFactory::create($config, $cache);
+    // load Telegram driver if no drivers added before and botman/telegram-driver is installed
+    Helper::instance()->loadDriverDefault();
 
-// Give the bot something to listen for.
-    Event::fire('vdomah.botman.before_listen', [$botman]);
+    // Create an instance
+    $obBotman = BotManFactory::create(Helper::instance()->config, new LaravelCache);
 
-// Start listening
-    $botman->listen();
+    // Give the bot something to listen for.
+    Event::fire(Helper::EVENT_BEFORE_LISTEN, [$obBotman]);
+
+    // Start listening
+    $obBotman->listen();
 });

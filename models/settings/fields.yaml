@@ -1,5 +1,30 @@
 fields:
-  telegram_bot_key:
-    label: Bot API token
+  drivers:
+    label: vdomah.botman::lang.fields.drivers.label
+    type: repeater
+    form:
+      fields:
+        code:
+          label: vdomah.botman::lang.fields.drivers.code
+          span: auto
+          type: text
+        settings:
+          label: vdomah.botman::lang.fields.drivers.settings.label
+          span: full
+          type: repeater
+          form:
+            fields:
+              field:
+                label: vdomah.botman::lang.fields.drivers.settings.field
+                span: auto
+              value:
+                label: vdomah.botman::lang.fields.drivers.settings.value
+                span: auto
+
+
+  conversation_cache_time:
+    label: vdomah.botman::lang.fields.conversation_cache_time
     span: auto
-    type: text
+    type: number
+    default: 60
+    comment: Double check what basic time dimension your Laravel version uses, seconds or milliseconds and set your cache time accordingly
