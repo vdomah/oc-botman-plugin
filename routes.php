@@ -3,7 +3,7 @@ use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\Cache\LaravelCache;
 use Vdomah\Botman\Classes\Helper;
 
-Route::any('/botman', function () {
+Route::post('/botman', function () {
     // Listen to event to load driver(s) you want to use.
     // DriverManager::loadDriver(TelegramDriver::class);
     Event::fire(Helper::EVENT_LOAD_DRIVER);

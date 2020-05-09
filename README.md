@@ -1,3 +1,11 @@
+# BotMan for OctoberCMS plugin
+Plugin use BotMan framework to create bot backend. Full BotMan docs: https://botman.io.
+
+Manually installing botman package:
+````$xslt
+composer require botman/botman
+````
+
 ## Gettings started
 
 1. First you need to install any messenger driver you want to use. For telegram run this in your project route:
@@ -32,6 +40,7 @@ public function boot()
 {
     // You need to load required drivers, telegram in this case. 
     // TelegramDriver::class is loaded by default in case you've installed botman/driver-telegram package
+    // and no driver was loaded
     Event::listen(Helper::EVENT_LOAD_DRIVER, function () {
         DriverManager::loadDriver(TelegramDriver::class);
         DriverManager::loadDriver(TelegramPhotoDriver::class);
@@ -52,7 +61,7 @@ public function boot()
 }
 ````
 
-### Conversations
+## Conversations
 Conversation is a class that you create in your plugin. For example in "conversations" directory. Please check BotMan's docs: https://botman.io/2.0/conversations
 
 Example from BotMan docs:
@@ -92,7 +101,7 @@ class OnboardingConversation extends Conversation
 }
 ````
 
-### Using same application as backend for several different bots
+## Using same application as backend for several different bots
 
 For this purpose you need to create your own endpoints in your plugin in routes.php 
 and implement the same logic as in Botman plugin's routes.php.
