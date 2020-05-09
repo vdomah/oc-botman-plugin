@@ -5,9 +5,10 @@ fields:
     form:
       fields:
         code:
-          label: vdomah.botman::lang.fields.drivers.code
+          label: vdomah.botman::lang.fields.drivers.code.label
           span: auto
           type: text
+          comment: vdomah.botman::lang.fields.drivers.code.comment
         settings:
           label: vdomah.botman::lang.fields.drivers.settings.label
           span: full

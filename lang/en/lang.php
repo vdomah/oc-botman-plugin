@@ -6,7 +6,10 @@
     'fields' => [
         'drivers' => [
             'label' => 'Drivers',
-            'code' => 'Code',
+            'code' => [
+                'label' => 'Code',
+                'comment' => 'This code should correspond to config key of driver. For existing drivers check the docs to get the right code. For Telegram use "telegram": https://botman.io/2.0/driver-telegram#installation-setup. For custom driver use your own key defined in driver class',
+            ],
             'settings' => [
                 'label' => 'Settings',
                 'field' => 'Field',
