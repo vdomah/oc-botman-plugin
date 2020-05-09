@@ -1,5 +1,6 @@
 <?php namespace Vdomah\Botman\Classes;
 
+use Event;
 use BotMan\BotMan\Drivers\DriverManager;
 use October\Rain\Support\Traits\Singleton;
 use Vdomah\Botman\Models\Settings;
@@ -10,6 +11,7 @@ class Helper
 
     const EVENT_LOAD_DRIVER = 'vdomah.botman.load_driver';
     const EVENT_BEFORE_LISTEN = 'vdomah.botman.before_listen';
+    const EVENT_AFTER_CONFIG_READY = 'vdomah.botman.after_config_ready';
 
     const DRIVER_DEFAULT = 'BotMan\Drivers\Telegram\TelegramDriver';
 
@@ -27,7 +29,7 @@ class Helper
     {
         $this->config = [
             'config' => [
-                'conversation_cache_time' => Settings::get('conversation_cache_time', 60),
+                'conversation_cache_time' => Settings::get('conversation_cache_time') ?: 60,
             ],
         ];
 
@@ -39,6 +41,12 @@ class Helper
             }
 
             $this->config[$arDriver['code']] = $arSettings;
+        }
+
+        $arResult = Event::fire(Helper::EVENT_AFTER_CONFIG_READY, [$this->config]);
+
+        if (is_array($arResult) && isset($arResult[0]) && is_array($arResult[0])) {
+            $this->config = $arResult[0];
         }
     }
 

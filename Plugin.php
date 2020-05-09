@@ -23,18 +23,6 @@ class Plugin extends PluginBase
         ];
     }
 
-    public function register()
-    {
-        $arDrivers = [
-            'code' => 'telegram',
-            'settings' => [
-                ['field' => 'token', 'value' => 'yourTOKEN'],
-            ],
-        ];
-
-        //Settings::set('drivers', $arDrivers);
-    }
-
     public function registerPermissions()
     {
         return [

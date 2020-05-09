@@ -1,7 +1,7 @@
 <?php return [
     'plugin' => [
         'name' => 'Botman',
-        'description' => 'Messenger agnostic bot library',
+        'description' => 'Messenger agnostic bot framework integration with OctoberCMS',
     ],
     'fields' => [
         'drivers' => [

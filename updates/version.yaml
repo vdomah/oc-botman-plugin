@@ -1,2 +1,4 @@
 1.0.0:
     - Initialize plugin.
+1.0.1:
+    - Override configs event added. Readme updated. Several bots on one code base feature added.
