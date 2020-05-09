@@ -117,7 +117,7 @@ Event::listen(Helper::EVENT_AFTER_CONFIG_READY, function ($arConfig) {
 });
 ````
 
-And to create your own endoint create the following routes.php in your plugin:
+And to create your own endpoint create the following routes.php in your plugin:
 ````$xslt
 <?php
 use BotMan\BotMan\BotManFactory;

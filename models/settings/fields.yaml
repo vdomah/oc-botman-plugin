@@ -23,8 +23,8 @@ fields:
 
 
   conversation_cache_time:
-    label: vdomah.botman::lang.fields.conversation_cache_time
+    label: vdomah.botman::lang.fields.conversation_cache_time.label
     span: auto
     type: number
     default: 60
-    comment: Double check what basic time dimension your Laravel version uses, seconds or milliseconds and set your cache time accordingly
+    comment: vdomah.botman::lang.fields.conversation_cache_time.comment

@@ -13,7 +13,10 @@
                 'value' => 'Value',
             ],
         ],
-        'conversation_cache_time' => 'Conversation cache time',
+        'conversation_cache_time' => [
+            'label' => 'Conversation cache time',
+            'comment' => 'Double check what basic time dimension your Laravel version uses, seconds or milliseconds and set your cache time accordingly',
+        ],
     ],
     'settings' => [
         'name' => 'Botman',
