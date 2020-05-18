@@ -28,4 +28,7 @@
     'permissions' => [
         'access_settings' => 'Botman settings access',
     ],
+    'value' => [
+        'back' => 'Back',
+    ],
 ];

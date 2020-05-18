@@ -14,8 +14,13 @@ Route::post('/botman', function () {
     // Create an instance
     $obBotman = BotManFactory::create(Helper::instance()->config, new LaravelCache);
 
-    // Give the bot something to listen for.
+    // Give bot something to listen for.
     Event::fire(Helper::EVENT_BEFORE_LISTEN, [$obBotman]);
+
+    // Add fallback listener
+    $obBotman->fallback(function($obBotman) {
+        Event::fire(Helper::EVENT_FALLBACK, [$obBotman]);
+    });
 
     // Start listening
     $obBotman->listen();

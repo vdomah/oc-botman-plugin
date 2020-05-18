@@ -101,17 +101,36 @@ class OnboardingConversation extends Conversation
 }
 ````
 
+## Helpers
+getButtons:
+````
+$question = Question::create($sText)
+            ->addButtons(Helper::instance()->getButtons($arButtons, true));
+````
+Accepts array or Collection of buttons as 1st parameter and boolean as 2nd defining if the Back button should be added.
+Returns array of Button objects.
+$arButtons can be in key-value format (button's code => button's name) 
+or button's code as key and button's name as 'label' or 'name':
+````
+$arButtons = [
+    '/start' => [
+        'label' => 'Start the machinery!',
+    ],
+];
+````
+
 ## Using same application as backend for several different bots
 
 For this purpose you need to create your own endpoints in your plugin in routes.php 
 and implement the same logic as in Botman plugin's routes.php.
 
-The key difference in this approach is requirement to add id_prefix parameter to each bot.
+The key difference in this approach is requirement to add id_prefix parameter to each bot. 
+That parameter creates different cache sub-storage which prevent bots data from intersection.
 To add it to the main bot you can extend default plugin configurations using this event:
 
 ````$xslt
 Event::listen(Helper::EVENT_AFTER_CONFIG_READY, function ($arConfig) {
-    $arConfig['config']['id_prefix'] = 'main_bot';
+    $arConfig['id_prefix'] = 'main_bot';
 
     return $arConfig;
 });
@@ -129,11 +148,17 @@ Route::any('/botman', function () {
     DriverManager::loadDriver(TelegramDriver::class);
 
     $config = Helper::instance()->config;
-    $config['config']['id_prefix'] = 'custom_bot';
+    //optional if you got several bots on one codebase
+    $config['id_prefix'] = 'custom_bot';
 
     // Create an instance
     $obBotman = BotManFactory::create($config, new LaravelCache);
 
+    // Add fallback listener
+    $obBotman->fallback(function($obBotman) {
+        Event::fire(Helper::EVENT_FALLBACK, [$obBotman]);
+    });
+    
     // Start listening
     $obBotman->listen();
 });
